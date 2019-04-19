@@ -1,11 +1,34 @@
 from django.shortcuts import render, redirect
 from .forms import FeedbackForm
 from .models import Student, Course, Feedback, Teacher
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
 
 def HomePage(request):
     return render(request,'login.html')
+
 def student_login(request):
-    return render(request,'login_student.html')
+    if request.user.is_authenticated():
+        return redirect('/')
+    if request.method == "POST":
+    	username = request.POST.get('username')
+    	password = request.POST.get('password')
+    	user = User.objects.filter(username=username)
+    	user = authenticate(username=username, password=password)
+
+    	if user:
+            print("Hello")
+            student = Student.objects.filter(user=user)
+            if student.count() != 0:
+                login(request, user)
+                return redirect('create_feedback')
+            else:
+                return render(request, 'login_student.html', {'i': 'Invalid User SAP ID'})
+    	else:
+    		return render(request, 'login_student.html', {'i': 'Invalid Password/SAP ID'})
+
+    return render(request, 'login_student.html', {'i': ''})
+
 def teacher_login(request):
     return render(request,'login_teacher.html')
 
@@ -136,23 +159,6 @@ def create_feedback(request):
         return render(request, 'feedback_create.html', {'form': form})
 
 
-def logIn(request):
-    if request.user.is_authenticated():
-        return redirect('/')
-    if request.method == "post":
-    	username = request.POST.get('username')
-    	password = request.POST.get('password')
-    	user = User.objects.filter(username=username)
-    	user = authenticate(username=username, password=password)
-
-    	if user:
-    		student = Student.objects.filter(user=user)
-    		if student.count() != 0:
-    			login(request, user)
-    			return redirect('create_feedback')
-    		else:
-    			return render(request, 'login_student.html', {'i': 'Invalid User SAP ID'})
-    	else:
-    		return render(request, 'login_student.html', {'i': 'Invalid Password/SAP ID'})
-
-    return render(request, 'login_student.html', {'i': ''})
+def logout_view(request):
+    logout(request)
+    return redirect("/")

@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^login_student/$', views.student_login,name='login_student'),
     url(r'^login_teacher/$', views.teacher_login,name='login_teacher'),
     url(r'^create/feedback/$',views.create_feedback,name = "create_feedback"),
+    url(r'^logout/$', views.logout_view,name='logout_student'),
 ]
