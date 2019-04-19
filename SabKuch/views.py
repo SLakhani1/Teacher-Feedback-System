@@ -11,3 +11,9 @@ def create_feedback(request):
     else:
         form = FeedbackForm()
     return render(request, 'feedback_create.html', {'form': form})
+from django.shortcuts import render
+
+# Create your views here.
+
+def HomePage(request):
+    return render(request,'login.html')
