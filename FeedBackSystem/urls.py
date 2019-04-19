@@ -19,7 +19,20 @@ from SabKuch import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',views.HomePage),
+<<<<<<< HEAD
     url(r'^login_student/$', views.student_login,name='login_student'),
     url(r'^login_teacher/$', views.teacher_login,name='login_teacher'),
     url(r'^create/feedback/$',views.create_feedback,name = "create_feedback"),
+=======
+<<<<<<< HEAD
+    url(r'^create/feedback/$',views.create_feedback, name="create_feedback"),
+=======
+<<<<<<< HEAD
+    url(r'^login_student/$', views.student_login,name='login_student'),
+    url(r'^login_teacher/$', views.teacher_login,name='login_teacher')
+=======
+    url(r'^create/feedback/$',views.create_feedback),
+>>>>>>> 5193875c7e365ef7333f6836246882e5b31f0a85
+>>>>>>> 5b5260392cda4bbaa57de0f771d1d7de9bb2da84
+>>>>>>> 10ca43950ab89106963dfd84537f6739e70aef2e
 ]
