@@ -18,5 +18,6 @@ from django.contrib import admin
 from SabKuch import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.HomePage)
+    url(r'^$',views.HomePage),
+    url(r'^create/feedback/$',views.create_feedback),
 ]
