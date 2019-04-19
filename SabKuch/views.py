@@ -4,3 +4,7 @@ from django.shortcuts import render
 
 def HomePage(request):
     return render(request,'login.html')
+def student_login(request):
+    return render(request,'login_student.html')
+def teacher_login(request):
+    return render(request,'login_teacher.html')
