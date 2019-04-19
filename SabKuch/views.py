@@ -30,7 +30,25 @@ def student_login(request):
     return render(request, 'login_student.html', {'i': ''})
 
 def teacher_login(request):
-    return render(request,'login_teacher.html')
+    if request.user.is_authenticated():
+        return redirect('/')
+    if request.method == "POST":
+    	username = request.POST.get('username')
+    	password = request.POST.get('password')
+    	user = User.objects.filter(username=username)
+    	user = authenticate(username=username, password=password)
+
+    	if user:
+            teacher = Teacher.objects.filter(user=user)
+            if teacher.count() != 0:
+                login(request, user)
+                return redirect('create_feedback')
+            else:
+                return render(request, 'login_teacher.html', {'i': 'Invalid User SAP ID'})
+    	else:
+    		return render(request, 'login_teacher.html', {'i': 'Invalid Password/SAP ID'})
+
+    return render(request, 'login_teacher.html', {'i': ''})
 
 def create_feedback(request):
     if request.user.is_authenticated():
