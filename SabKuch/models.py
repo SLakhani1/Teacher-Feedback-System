@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 class Course(models.Model):
     course_code = models.CharField(max_length=20, primary_key=True, blank = False)
     course_name = models.CharField(max_length=40, blank = False)
-    session = models.CharField(max_length=20, blank = False)
+    semester = models.PositiveIntegerField(validators = [MaxValueValidator(10)], default=1)
+    department = models.CharField(max_length=3, choices=( ('IT', 'IT'), ('ECE', 'ECE')), default="IT")
     ltp = models.PositiveIntegerField(validators = [MaxValueValidator(333)], blank = False)
     
     def __str__(self):
@@ -18,7 +19,7 @@ class Teacher(models.Model):
     first_name = models.CharField(max_length=20, blank = False)
     last_name = models.CharField(max_length=20, blank = False)
     designation = models.CharField(max_length=20 , blank = False)
-    department = models.CharField(max_length=10, blank = False)
+    department = models.CharField(max_length=3, choices=( ('IT', 'IT'), ('ECE', 'ECE')), default="IT")
     courses = models.ManyToManyField(Course, blank = False, related_name='course_teacher')
 
     def __str__(self):
@@ -30,6 +31,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=20, blank = False)
     last_name = models.CharField(max_length=20, blank = False)
     semester = models.PositiveIntegerField(validators = [MaxValueValidator(10)], blank = False)
+    department = models.CharField(max_length=3, choices=( ('IT', 'IT'), ('ECE', 'ECE')), default="IT")
 
     def __str__(self):
         return self.enrollment_id

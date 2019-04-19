@@ -19,5 +19,5 @@ from SabKuch import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',views.HomePage),
-    url(r'^create/feedback/$',views.create_feedback),
+    url(r'^create/feedback/$',views.create_feedback, name="create_feedback"),
 ]
