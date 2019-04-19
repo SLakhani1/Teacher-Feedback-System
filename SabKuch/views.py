@@ -4,8 +4,15 @@ from .models import Student, Course, Feedback, Teacher
 
 def HomePage(request):
     return render(request,'login.html')
+<<<<<<< HEAD
+def student_login(request):
+    return render(request,'login_student.html')
+def teacher_login(request):
+    return render(request,'login_teacher.html')
+=======
 
 def create_feedback(request):
+<<<<<<< HEAD
     if request.user.is_authenticated():
 
     #     username = request.user
@@ -130,3 +137,16 @@ def create_feedback(request):
         else:
             form = FeedbackForm()
         return render(request, 'feedback_create.html', {'form': form})
+=======
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            feedback.save()
+            return redirect('login.html')
+    else:
+        form = FeedbackForm()
+    return render(request, 'feedback_create.html', {'form': form})
+from django.shortcuts import render
+>>>>>>> 5193875c7e365ef7333f6836246882e5b31f0a85
+>>>>>>> 5b5260392cda4bbaa57de0f771d1d7de9bb2da84
