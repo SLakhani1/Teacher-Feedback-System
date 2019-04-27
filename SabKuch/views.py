@@ -17,17 +17,16 @@ def student_login(request):
     	user = authenticate(username=username, password=password)
 
     	if user:
-            print("Hello")
             student = Student.objects.filter(user=user)
             if student.count() != 0:
                 login(request, user)
                 return redirect('create_feedback')
             else:
-                return render(request, 'login_student.html', {'i': 'Invalid User SAP ID','username': 'username'})
+                return render(request, 'login_student.html', {'i': 'Invalid User SAP ID','username': username})
     	else:
-    		return render(request, 'login_student.html', {'i': 'Invalid Password/SAP ID','username': 'username'})
+    		return render(request, 'login_student.html', {'i': 'Invalid Password/SAP ID','username': username})
 
-    return render(request, 'login_student.html', {'i': '',,'username': 'username'})
+    return render(request, 'login_student.html', {'i': '','username': username})
 
 def teacher_login(request):
     if request.user.is_authenticated():
@@ -44,11 +43,11 @@ def teacher_login(request):
                 login(request, user)
                 return redirect('create_feedback')
             else:
-                return render(request, 'login_teacher.html', {'i': 'Invalid User SAP ID', 'username': 'username'})
+                return render(request, 'login_teacher.html', {'i': 'Invalid User SAP ID', 'username': username})
     	else:
-    		return render(request, 'login_teacher.html', {'i': 'Invalid Password/SAP ID', 'username': 'username'})
+    		return render(request, 'login_teacher.html', {'i': 'Invalid Password/SAP ID', 'username': username})
 
-    return render(request, 'login_teacher.html', {'i': '', 'username': 'username'})
+    return render(request, 'login_teacher.html', {'i': '', 'username': username})
 
 def create_feedback(request):
 
@@ -62,7 +61,10 @@ def create_feedback(request):
         if request.method == "POST":
             form = FeedbackForm(request.POST, user=request.user)
             if form.is_valid():
+                course_id = request.POST.get('course')
+                print(course_id)
                 feedback = form.save(commit=False)
+                feedback.course_id = Course.objects.filter(course_code=course_id)[0]
                 feedback.student_id = request.user.student
                 feedback.save()
                 return redirect('login.html')
