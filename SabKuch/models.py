@@ -26,15 +26,15 @@ class Teacher(models.Model):
         return self.fac_code
 
 class Student(models.Model):
-    user = models.OneToOneField(User)
-    enrollment_id = models.CharField(max_length=20, primary_key=True)
+    user = models.OneToOneField(User, related_name='student')
+    #enrollment_id = models.CharField(max_length=20, primary_key=True)
     first_name = models.CharField(max_length=20, blank = False)
     last_name = models.CharField(max_length=20, blank = False)
     semester = models.PositiveIntegerField(validators = [MaxValueValidator(10)], blank = False)
     department = models.CharField(max_length=3, choices=( ('IT', 'IT'), ('ECE', 'ECE')), default="IT")
 
     def __str__(self):
-        return self.enrollment_id
+        return self.user.username
 
 class Feedback(models.Model):
     student_id = models.ForeignKey(Student,on_delete=models.CASCADE, blank = False)
