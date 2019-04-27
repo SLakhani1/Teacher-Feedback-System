@@ -23,11 +23,11 @@ def student_login(request):
                 login(request, user)
                 return redirect('create_feedback')
             else:
-                return render(request, 'login_student.html', {'i': 'Invalid User SAP ID'})
+                return render(request, 'login_student.html', {'i': 'Invalid User SAP ID','username': 'username'})
     	else:
-    		return render(request, 'login_student.html', {'i': 'Invalid Password/SAP ID'})
+    		return render(request, 'login_student.html', {'i': 'Invalid Password/SAP ID','username': 'username'})
 
-    return render(request, 'login_student.html', {'i': ''})
+    return render(request, 'login_student.html', {'i': '',,'username': 'username'})
 
 def teacher_login(request):
     if request.user.is_authenticated():
