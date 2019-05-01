@@ -18,9 +18,15 @@ from django.contrib import admin
 from SabKuch import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$',views.HomePage),
-    url(r'^login_student/$', views.student_login,name='login_student'),
-    url(r'^login_teacher/$', views.teacher_login,name='login_teacher'),
-    url(r'^create/feedback/$',views.create_feedback,name = "create_feedback"),
-    url(r'^logout/$', views.logout_view,name='logout_student'),
+    url(r'^$',views.HomePage,name='Home'),
+    url(r'^dashboard_student/$',views.dashboard_student,name = "dashboard_student"),
+    url(r'^dashboard_teacher/$',views.dashboard_teacher,name = "dashboard_teacher"),
+    url(r'^form/$',views.feedback_form,name = "feedback_form"),
+    url(r'^logout/$', views.logout_view,name='logout'),
+    url(r'^teacher/$', views.teachers_detail, name='teachers_detail'),
+    url(r'^teacher/(?P<slug>[-\w\d]+)$', views.teachers_detail2, name='teachers_detail2'),
+    url(r'^teacher2/(?P<slug>[-\w\d]+)$', views.teachers_detail3, name='teachers_detail3'),
+    url(r'^view_feedback/$', views.view_feedback, name='view_feedback'),
+    url(r'^view_feedback2/$', views.view_feedback2, name='view_feedback2'),
+
 ]

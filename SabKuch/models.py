@@ -24,6 +24,34 @@ class Teacher(models.Model):
 
     def __str__(self):
         return self.fac_code
+    
+    def get_max_field1(self):
+        return self.fac_codes.all().aggregate(Max('skills')).get('skills__max')
+
+    def get_avg_field1(self):
+        return self.fac_codes.all().aggregate(Avg('skills')).get('skills__avg')
+
+    def get_min_field1(self):
+        return self.fac_codes.all().aggregate(Min('skills')).get('skills__min')
+
+    def get_max_field2(self):
+        return self.fac_codes.all().aggregate(Max('knowledge')).get('knowledge__max')
+
+    def get_avg_field2(self):
+        return self.fac_codes.all().aggregate(Avg('knowledge')).get('knowledge__avg')
+
+    def get_min_field2(self):
+        return self.fac_codes.all().aggregate(Min('knowledge')).get('knowledge__min')
+
+    def get_max_field3(self):
+        return self.fac_codes.all().aggregate(Max('interactivity')).get('interactivity__max')
+
+    def get_avg_field3(self):
+        return self.fac_codes.all().aggregate(Avg('interactivity')).get('interactivity__avg')
+
+    def get_min_field3(self):
+        return self.fac_codes.all().aggregate(Min('interactivity')).get('interactivity__min')
+    
 
 class Student(models.Model):
     user = models.OneToOneField(User, related_name='student')

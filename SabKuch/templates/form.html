@@ -1,0 +1,171 @@
+﻿{% load static %}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta content="" name="description" />
+    
+    <title>FeedBack System</title>
+	<!-- Bootstrap Styles-->
+    <link href="{% static 'assets1/css/bootstrap.css' %}" rel="stylesheet" />
+     <!-- FontAwesome Styles-->
+    <link href="{% static 'assets1/css/font-awesome.css' %}" rel="stylesheet" />
+	
+    <link href="{% static 'assets1/css/select2.min.css' %}" rel="stylesheet" >
+	<link href="{% static 'assets1/css/checkbox3.min.css' %}" rel="stylesheet" >
+        <!-- Custom Styles-->
+    <link href="{% static 'assets1/css/custom-styles.css' %}" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default top-navbar" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><strong>FEEDBACK SYSTEM</strong></a>
+				<div id="sideNav" href="">
+			<i class="fa fa-bars icon"></i> 
+			</div>
+            </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+       
+                <!-- /.dropdown -->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> {{ username }}</a>
+                        </li>
+                       <!--  <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li> -->
+                        <li class="divider"></li>
+                        <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+
+                    <li>
+                        <a href="{% url 'dashboard_student' %}"><i class="fa fa-dashboard"></i> Dashboard</a>
+                    </li>
+                
+                    <li>
+                        <a href="{% url 'feedback_form' %}" class="active-menu"><i class="fa fa-edit"></i>Feedback Forms </a>
+                    </li>
+
+                     <li>
+                         <a href="{% url 'view_feedback' %}" ><i class="fa fa-edit"></i>View Feedback </a>
+                    </li>
+                    <li>
+                  
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+		  <div class="header"> 
+                        <h1 class="page-header">
+                             FeedBack <small></small>
+                        </h1>
+						
+									
+		</div>
+		
+            
+
+
+            
+            <div id="page-inner"> 
+                 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="card-title">
+                                        <div class="title">Fill the below form</div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+
+                                    <form method="post">
+                                      {% csrf_token %}
+
+                                      <div class="sub-title">Subject</div>
+                                      {{ form.course}}  
+
+                                      <div class="sub-title">Teacher Id</div>
+                                      {{form.teacher_id}}
+                                      
+                                         <div class="sub-title">Abilities to understand student's difficulties and willingness to help them :</div>
+
+                                      {{form.skills}}
+
+
+                                          <div class="sub-title">Commitment to academic work in the class :</div>
+                                            {{form.knowledge}}
+
+
+                                         <div class="sub-title">Regularity and Punctuality :</div>
+
+                                            {{form.interactivity}}
+
+                                      <div class="sub-title">Suggestions</div>
+                                      {{form.review}}
+
+
+                                    <button type="submit" class="btn btn-default">Submit</button>
+
+                                    </form>
+
+
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+			</div> -->
+             <!-- /. PAGE INNER  -->
+            <!-- </div> -->
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- JS Scripts-->
+    <!-- jQuery Js -->
+    <script src="{% static 'assets1/js/jquery-1.10.2.js' %}"></script>
+      <!-- Bootstrap Js -->
+    <script src="{% static 'assets1/js/bootstrap.min.js' %}"></script>
+    <!-- Metis Menu Js -->
+    <script src="{% static 'assets1/js/jquery.metisMenu.js' %}"></script>
+	<script src="{% static 'assets1/js/select2.full.min.js' %}"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+	  $(".selectbox").select2();
+	});
+	</script>
+      <!-- Custom Js -->
+    <script src="{% static 'assets1/js/custom-scripts.js' %}"></script> 
+	
+		
+   
+</body>
+</html>
